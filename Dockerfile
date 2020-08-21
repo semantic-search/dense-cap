@@ -22,5 +22,4 @@ RUN sh scripts/download_pretrained_model.sh
 RUN apt-get install -y python3-pip
 RUN pip3 install redis python-dotenv kafka-python
 COPY main.py . 
-ENV LC_ALL C.UTF-8
-ENV LANG C.UTF-8
+CMD ["python", "main.py"]
