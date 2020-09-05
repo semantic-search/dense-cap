@@ -81,7 +81,6 @@ def predict(file_name,image_id):
     return response
 
 if __name__ == "__main__":
-    print("shit jere")
     for message in consumer_easyocr:
         print('xxx--- inside open images consumer---xxx')
         print(KAFKA_HOSTNAME + ':' + KAFKA_PORT)
