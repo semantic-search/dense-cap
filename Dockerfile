@@ -12,10 +12,10 @@ RUN apt-get purge -y cmake
 RUN git clone https://github.com/Kitware/CMake.git
 RUN apt-get install libssl-dev
 RUN cd CMake && ./bootstrap; make; sudo make install
-# recursively clonning
-RUN git clone --recurse-submodules https://github.com/semantic-search/dense-cap.git
-WORKDIR dense-cap
-RUN sh densecap/scripts/download_pretrained_model.sh
+#download densecap
+RUN git clone https://github.com/jcjohnson/densecap.git
+WORKDIR densecap
+RUN sh scripts/download_pretrained_model.sh
 RUN apt-get install -y python3-pip
+COPY . .
 RUN pip3 install -r requirements.txt
-CMD ["python", "main.py"]

@@ -20,6 +20,8 @@ SEND_TOPIC_TEXT = globals.SEND_TOPIC_TEXT
 
 
 def send_to_topic(topic, value_to_send_dic):
+    print("in send to topics")
+
     data_json = json.dumps(value_to_send_dic)
     producer.send(topic, value=data_json)
 
@@ -42,7 +44,7 @@ if __name__ == "__main__":
             """document"""
             images_array = []
             for image in db_object.files:
-                pdf_image = "densecap/" + str(uuid.uuid4()) + ".jpg"
+                pdf_image = str(uuid.uuid4()) + ".jpg"
                 with open(pdf_image, 'wb') as file_to_save:
                     file_to_save.write(image.file.read())
                 images_array.append(pdf_image)
@@ -76,7 +78,7 @@ if __name__ == "__main__":
             print(globals.ALLOWED_IMAGE_TYPES)
             if db_object.mime_type in globals.ALLOWED_IMAGE_TYPES:
                 print("in safe file type")
-                with open("densecap/"+file_name, 'wb') as file_to_save:
+                with open(file_name, 'wb') as file_to_save:
                     file_to_save.write(db_object.file.read())
                 full_res = predict(file_name)
                 print(full_res)
