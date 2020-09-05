@@ -15,7 +15,6 @@ RUN cd CMake && ./bootstrap; make; sudo make install
 #download densecap
 RUN git clone https://github.com/jcjohnson/densecap.git
 WORKDIR densecap
-RUN sh scripts/download_pretrained_model.sh
-RUN apt-get install -y python3-pip
 COPY . .
 RUN pip3 install -r requirements.txt
+RUN sh scripts/download_pretrained_model.sh
