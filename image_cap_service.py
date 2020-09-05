@@ -1,12 +1,12 @@
 import subprocess
 import json
 import os
-result_dir = "vis/data/"
+result_dir = "densecap/vis/data/"
 result_file = result_dir+"results.json"
 
 
 def predict(file_name, doc=False):
-    subprocess.call(["th", "run_model.lua", "-input_image", file_name])
+    subprocess.call(["th", "densecap/run_model.lua", "-input_image", file_name])
     with open(result_file) as json_file:
         data = json.load(json_file)
     captions = []
