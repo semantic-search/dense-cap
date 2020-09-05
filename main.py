@@ -7,8 +7,9 @@ import init
 from image_cap_service import predict
 import globals
 
-global_init()
 load_dotenv()
+global_init()
+
 
 RECEIVE_TOPIC = globals.RECEIVE_TOPIC
 r = init.redis_obj
