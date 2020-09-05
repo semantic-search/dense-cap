@@ -1,14 +1,10 @@
 import json
-from dotenv import load_dotenv
 import uuid
 from db_models.mongo_setup import global_init
 from db_models.models.cache_model import Cache
 import init
 from image_cap_service import predict
 import globals
-
-load_dotenv()
-global_init()
 
 
 def send_to_topic(topic, value_to_send_dic):
@@ -17,6 +13,7 @@ def send_to_topic(topic, value_to_send_dic):
 
 
 if __name__ == "__main__":
+    global_init()
     for message in init.consumer_obj:
         message = message.value
         db_key = str(message)

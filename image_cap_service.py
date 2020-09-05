@@ -32,8 +32,6 @@ def predict(file_name, doc=False):
             "scores": scores,
             "is_doc_type": False
         }
-
-
     os.remove(file_name)
     os.remove(result_dir + file_name)
     os.remove(result_file)
