@@ -29,7 +29,8 @@ def predict(file_name, doc=False):
         response = {
             "file_name": file_name,
             "captions": captions,
-            "scores": scores
+            "scores": scores,
+            "is_doc_type": False
         }
 
 

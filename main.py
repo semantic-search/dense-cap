@@ -44,11 +44,13 @@ if __name__ == "__main__":
             full_res = {
                 "file_name": file_name,
                 "captions": captions_list,
-                "scores": scores_list
+                "scores": scores_list,
+                "is_doc_type": True
             }
             text_res = {
                 "file_name": file_name,
-                "captions": captions_list
+                "captions": captions_list,
+                "is_doc_type": True
             }
             send_to_topic(globals.SEND_TOPIC_FULL, value_to_send_dic=full_res)
             send_to_topic(globals.SEND_TOPIC_TEXT, value_to_send_dic=text_res)
@@ -62,7 +64,8 @@ if __name__ == "__main__":
                 full_res = predict(file_name)
                 text_res = {
                     "file_name": full_res["file_name"],
-                    "captions": full_res["captions"]
+                    "captions": full_res["captions"],
+                    "is_doc_type": False
                 }
                 send_to_topic(globals.SEND_TOPIC_FULL, value_to_send_dic=full_res)
                 send_to_topic(globals.SEND_TOPIC_TEXT, value_to_send_dic=text_res)
