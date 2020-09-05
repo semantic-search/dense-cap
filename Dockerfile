@@ -1,5 +1,5 @@
 FROM nagadomi/torch7:latest
-#Densecap Dependencies
+# Densecap Dependencies
 RUN luarocks install nn
 RUN luarocks install image
 RUN luarocks install lua-cjson
@@ -12,9 +12,10 @@ RUN apt-get purge -y cmake
 RUN git clone https://github.com/Kitware/CMake.git
 RUN apt-get install libssl-dev
 RUN cd CMake && ./bootstrap; make; sudo make install
-#download densecap
+# download densecap
 RUN git clone https://github.com/jcjohnson/densecap.git
 WORKDIR densecap
+RUN apt-get install -y python3-pip
 COPY . .
 RUN pip3 install -r requirements.txt
 RUN sh scripts/download_pretrained_model.sh

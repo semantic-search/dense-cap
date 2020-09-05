@@ -8,7 +8,7 @@ import json
 # Redis initialize
 redis_obj = redis.StrictRedis(
     host=globals.REDIS_HOSTNAME,
-    port=globals.KAFKA_PORT,
+    port=globals.REDIS_PORT,
     password=globals.REDIS_PASSWORD,
     ssl=True
 )
