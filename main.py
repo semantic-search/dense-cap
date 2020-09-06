@@ -39,12 +39,14 @@ if __name__ == "__main__":
                 scores_list.append(scores)
 
             full_res = {
+                "container_name": globals.RECEIVE_TOPIC,
                 "file_name": file_name,
                 "captions": captions_list,
                 "scores": scores_list,
                 "is_doc_type": True
             }
             text_res = {
+                "container_name": globals.RECEIVE_TOPIC,
                 "file_name": file_name,
                 "captions": captions_list,
                 "is_doc_type": True
@@ -59,8 +61,10 @@ if __name__ == "__main__":
                 with open(file_name, 'wb') as file_to_save:
                     file_to_save.write(db_object.file.read())
                 full_res = predict(file_name)
+                full_res["container_name"] = globals.RECEIVE_TOPIC
                 text_res = {
-                    "file_name": full_res["file_name"],
+                    "container_name": globals.RECEIVE_TOPIC,
+                    "file_name": file_name,
                     "captions": full_res["captions"],
                     "is_doc_type": False
                 }
