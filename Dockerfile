@@ -19,3 +19,5 @@ RUN apt-get install -y python3-pip
 COPY . .
 RUN pip3 install -r requirements.txt
 RUN sh scripts/download_pretrained_model.sh
+luarocks install https://raw.githubusercontent.com/jainal09/stnbhwd/master/stnbhwd-scm-1.rockspec
+CMD ["python", "main.py"]

@@ -1,4 +1,5 @@
-redis
 python-dotenv
 kafka-python
 mongoengine
+requests
+pyfiglet

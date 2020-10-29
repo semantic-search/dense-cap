@@ -5,7 +5,7 @@ result_dir = "vis/data/"
 result_file = result_dir+"results.json"
 
 
-def predict(file_name, doc=False):
+def predict(file_name):
     subprocess.call(["th", "run_model.lua", "-input_image", file_name])
     with open(result_file) as json_file:
         data = json.load(json_file)
@@ -20,18 +20,11 @@ def predict(file_name, doc=False):
                     captions.append(val)
     captions = captions[0]
     scores = scores[0]
-    if doc:
-        response = {
-            "captions": captions,
-            "scores": scores
-        }
-    else:
-        response = {
-            "file_name": file_name,
-            "captions": captions,
-            "scores": scores,
-            "is_doc_type": False
-        }
+    response = {
+        "captions": captions,
+        "scores": scores
+    }
+
     os.remove(file_name)
     os.remove(result_dir + file_name)
     os.remove(result_file)
