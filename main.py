@@ -64,7 +64,7 @@ if __name__ == "__main__":
             final_scores = db_object.scores
         except Exception as e:
             print("EXCEPTION IN FETCHING FROM DATABASE......")
-            err_logger(str(e) + " EXCEPTION IN FETCHING FROM DATABASE......FILE ID {FILE_ID}")
+            err_logger(str(e) + " EXCEPTION IN FETCHING FROM DATABASE......FILE ID " + FILE_ID)
             continue
 
         if db_object.is_doc_type:
