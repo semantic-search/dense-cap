@@ -1,23 +1,6 @@
-FROM nagadomi/torch7:latest
-# Densecap Dependencies
-RUN luarocks install nn
-RUN luarocks install image
-RUN luarocks install lua-cjson
-RUN luarocks install https://raw.githubusercontent.com/jcjohnson/torch-rnn/master/torch-rnn-scm-1.rockspec
-RUN apt-get update
-RUN apt-get -y upgrade
-RUN apt-get install wget
-# rebuilding cmake
-RUN apt-get purge -y cmake
-RUN git clone https://github.com/Kitware/CMake.git
-RUN apt-get install libssl-dev
-RUN cd CMake && ./bootstrap; make; sudo make install
-# download densecap
-RUN git clone https://github.com/jcjohnson/densecap.git
-WORKDIR densecap
-RUN apt-get install -y python3-pip
-COPY . .
+FROM ghcr.io/semantic-search/densecap_gpu:latest
+RUN luarocks install https://raw.githubusercontent.com/jainal09/stnbhwd/master/stnbhwd-scm-1.rockspec
+COPY requirements.txt .
 RUN pip3 install -r requirements.txt
-RUN sh scripts/download_pretrained_model.sh
-luarocks install https://raw.githubusercontent.com/jainal09/stnbhwd/master/stnbhwd-scm-1.rockspec
-CMD ["python", "main.py"]
+COPY . .
+CMD python3 main.py
