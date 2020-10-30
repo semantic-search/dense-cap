@@ -68,32 +68,33 @@ if __name__ == "__main__":
             continue
 
         if db_object.is_doc_type:
-            """document"""
-            images_array = []
-            for image in db_object.files:
-                pdf_image = str(uuid.uuid4()) + ".jpg"
-                with open(pdf_image, 'wb') as file_to_save:
-                    file_to_save.write(image.file.read())
-                images_array.append(pdf_image)
-            for image in images_array:
-                try:
-                    response = predict(image)
-                    for label, score in zip(response["captions"], response['scores']):
-                        if label not in final_labels:
-                            final_labels.append(label.strip())
-                            final_scores.append(score)
-                        else:
-                            x = final_labels.index(label)
-                            score_to_check = final_scores[x]
-                            if score > score_to_check:
-                                final_scores[x] = score
-                except Exception as e:
-                    print(str(e) + "Exception in predict")
-                    err_logger(str(e) + "Exception in predict")
-                    continue
-            save_to_db(db_object, final_labels, final_scores)
-            print(".....................FINISHED PROCESSING FILE.....................")
-            update_state(file_name)
+            if db_object.contains_images:
+                """document"""
+                images_array = []
+                for image in db_object.files:
+                    pdf_image = str(uuid.uuid4()) + ".jpg"
+                    with open(pdf_image, 'wb') as file_to_save:
+                        file_to_save.write(image.file.read())
+                    images_array.append(pdf_image)
+                for image in images_array:
+                    try:
+                        response = predict(image)
+                        for label, score in zip(response["captions"], response['scores']):
+                            if label not in final_labels:
+                                final_labels.append(label.strip())
+                                final_scores.append(score)
+                            else:
+                                x = final_labels.index(label)
+                                score_to_check = final_scores[x]
+                                if score > score_to_check:
+                                    final_scores[x] = score
+                    except Exception as e:
+                        print(str(e) + "Exception in predict")
+                        err_logger(str(e) + "Exception in predict")
+                        continue
+                save_to_db(db_object, final_labels, final_scores)
+                print(".....................FINISHED PROCESSING FILE.....................")
+                update_state(file_name)
         else:
             """image"""
             with open(file_name, 'wb') as file_to_save:
