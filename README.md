@@ -1,7 +1,7 @@
 # dense-cap
 ![dense cap](https://github.com/jcjohnson/densecap/raw/master/imgs/resultsfig.png)
 
-To clone this remove use this command
+To clone this project use this command
 ```git
     git clone --recurse-submodules https://github.com/semantic-search/dense-cap.git
 ```
